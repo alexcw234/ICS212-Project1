@@ -20,8 +20,8 @@
 #include "record.h"
 
 
-int addRecord (struct record **aRecord, int, char [ ],char [ ],int);
-int printRecord (struct record *aRecord, int);
-int modifyRecord (struct record *aRecord, int, char [ ]);
-void printAllRecords(struct record *aRecord);
-int deleteRecord(struct record **aRecord, int);
+int addRecord (struct record **, int, char [ ],char [ ],int);
+int printRecord (struct record *, int);
+int modifyRecord (struct record *, int, char [ ]);
+void printAllRecords(struct record *);
+int deleteRecord(struct record **, int);

@@ -567,7 +567,7 @@ int main(int argc, char* argv[])
                     {
                         loopQuit(&addRecLoop);
                         loopQuit(&yesnoLoop);
-                        modifyRecord(&start, tempAccNo, tempAddress);
+                        modifyRecord(start, tempAccNo, tempAddress);
                     }
                     else if (validation == 1)
                     {
@@ -638,7 +638,7 @@ int main(int argc, char* argv[])
                     {
                         loopQuit(&addLineLoop);
                         loopQuit(&yesnoLoop);
-                        printRecord(&start, tempAccNo);
+                        printRecord(start, tempAccNo);
                     }
                     else if (validation == 1)
                     {
@@ -668,7 +668,7 @@ int main(int argc, char* argv[])
 
 
 
-                    printAllRecords(&start);
+                    printAllRecords(start);
 
 
                     loopQuit(&yesnoLoop);
