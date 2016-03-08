@@ -179,6 +179,10 @@ return 0;
 
 int printRecord (struct record *start, int uaccountno)
 {
+
+
+
+
       if (debugmode == 1)
       {
       printf("\n\n**************************************************");
@@ -215,9 +219,6 @@ int modifyRecord (struct record *start, int uaccountno, char uaddr[ ])
     printf("\n\nmodifyRecord(struct record*, int, char[]) has been called with parameters passed:\naccNo: %d\naddress: %s", uaccountno, uaddr);
     printf("\n\n**************************************************\n");
     }
-
-
-
 
 
 
