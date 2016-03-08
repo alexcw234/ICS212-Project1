@@ -1,11 +1,11 @@
-hw3 : hw3interface.o hw3database.o
-        cc -o hw3 hw3interface.o hw3database.o
+project1 : project1interface.o project1database.o
+        cc -o project1 project1interface.o project1database.o
 
-hw3interface.o : hw3interface.c hw3interface.h
-        cc -c hw3interface.c
+project1interface.o : project1interface.c project1interface.h
+        cc -c project1interface.c
 
-hw3database.o : hw3database.c hw3database.h record.h
-        cc -c hw3database.c
+project1database.o : project1database.c project1database.h record.h
+        cc -c project1database.c
 
 clean :
-        rm hw3 hw3database.o hw3interface.o
+        rm project1 project1database.o project1interface.o
