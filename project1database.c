@@ -80,8 +80,7 @@ if (*start != NULL)
             temp = temp->next;
         }
 
-
-        else if (uaccountno <= temp->accountno)
+        if (uaccountno <= temp->accountno)
         {
 
             tempnext = temp;
