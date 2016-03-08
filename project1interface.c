@@ -21,7 +21,7 @@
 #include <ctype.h>
 #include <stdlib.h>
 
-#include "hw3interface.h"
+#include "project1interface.h"
 
 int debugmode = 0;
 
