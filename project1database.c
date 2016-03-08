@@ -181,14 +181,13 @@ int printRecord (struct record *start, int uaccountno)
 {
 
 
-
-
       if (debugmode == 1)
       {
       printf("\n\n**************************************************");
       printf("\n\nprintRecord(struct record*, int) has been called with parameters passed:\naccNo: %d", uaccountno);
       printf("\n\n**************************************************\n");
       }
+
 
 
 
@@ -240,6 +239,13 @@ return 0;
 
 void printAllRecords(struct record *start)
 {
+
+  struct record * temp ;
+
+  struct record * prev;
+
+  temp = start;
+
     if (debugmode == 1)
     {
     printf("\n\n**************************************************");
@@ -247,7 +253,20 @@ void printAllRecords(struct record *start)
     printf("\n\n**************************************************\n");
     }
 
+    while (temp->next != NULL)
+    {
 
+        prev = temp;
+
+        temp = temp->next;
+
+        printf("\nAccount Number:\t%d", temp->accountno);
+        printf("\nName:\t%s", temp->name);
+        printf("\nAddress:");
+        printf("\n%s",temp->address);
+        printf("\nYear of Birth:\t%d\n", temp->yearofbirth);
+
+    }
 
 
 
@@ -283,7 +302,7 @@ temp = *start;
 if (debugmode == 1)
 {
 printf("\n\n**************************************************");
-printf("\n\nprintRecord(struct record**) has been called with parameters passed:\naccNo: %d", uaccountno);
+printf("\n\ndeleteRecord(struct record**) has been called with parameters passed:\naccNo: %d", uaccountno);
 printf("\n\n**************************************************\n");
 }
 
