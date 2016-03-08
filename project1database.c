@@ -75,17 +75,18 @@ if (*start != NULL)
         }
 
 
-        if (uaccountno <= temp->accountno)
+        else if (uaccountno <= temp->accountno)
         {
 
             tempnext = temp;
             prev->next = (struct record*) malloc(sizeof(struct record));
             temp = prev->next;
+
         }
 
     }
 
-    if (temp->next != NULL)
+    if (tempnext != NULL)
     {
         temp->next = tempnext;
 
