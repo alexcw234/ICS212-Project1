@@ -2,17 +2,17 @@
 //
 // NAME: Alex Watanabe
 //
-// HOMEWORK: 3
+// Project : 1
 //
 // CLASS: ICS 212
 //
 // INSTRUCTOR: Ravi Narayan
 //
-// DATE: Feb 2 , 2016
+// DATE: Mar 7 , 2016
 //
 // FILE: hw3database.c
 //
-// DESCRIPTION: This file contains the database functions for hw3
+// DESCRIPTION: This file contains the database functions for project1
 //
 //****************************************************************/
 
@@ -30,7 +30,7 @@ extern debugmode;
 // DESCRIPTION: (Not yet implemented) Function that adds data to the
 //              struct "record" as specified by parameters
 //
-// Parameters:  nextrec (record **): pointer to the start record's next record.
+// Parameters:  start (record **): pointer to the start record's pointer.
 //              accNo (int) : the user's account number to be added.
 //              name (char[]) : the user's name to be added.
 //              address (char[]) : the user's address to be added.
@@ -62,9 +62,15 @@ printf("\n\n**************************************************\n");
 if (*start != NULL)
 {
     temp = *start;
-    prev = temp;
-    temp = temp->next;
 
+    if (temp->next != NULL && uaccountno <= temp->accountno)
+    {
+      tempnext = temp;
+      temp = (struct record*) malloc(sizeof(struct record));
+      *start = temp;
+      temp->next = NULL;
+
+    }
 
     while (temp->next != NULL)
     {
@@ -89,13 +95,9 @@ if (*start != NULL)
     if (tempnext != NULL)
     {
         temp->next = tempnext;
-
         temp->accountno = uaccountno;
-
         strcpy(temp->name, uname);
-
         strcpy(temp->address, uaddr);
-
         temp->yearofbirth = uyob;
 
     }
@@ -103,53 +105,31 @@ if (*start != NULL)
     {
      if (uaccountno > temp->accountno)
      {
-
         temp->next = (struct record*) malloc(sizeof(struct record));
 
-
         prev = temp->next;
-
         temp = temp->next;
 
         temp->accountno = uaccountno;
-
-
         strcpy(temp->name, uname);
-
         strcpy(temp->address, uaddr);
-
-
         temp->yearofbirth = uyob;
-
-
         temp->next = NULL;
       }
     }
 }
-if (*start == NULL)
+else if (*start == NULL)
 {
 
     *start = (struct record*) malloc(sizeof(struct record));
 
     temp = *start;
 
-    temp->next = (struct record*) malloc(sizeof(struct record));
-
-
-    temp = temp->next;
-
     temp->accountno = uaccountno;
-
-
     strcpy(temp->name, uname);
-
     strcpy(temp->address, uaddr);
-
-
     temp->yearofbirth = uyob;
-
     temp->next = NULL;
-
 }
 
 
@@ -181,14 +161,12 @@ return 0;
 int printRecord (struct record *start, int uaccountno)
 {
 
-
       if (debugmode == 1)
       {
       printf("\n\n**************************************************");
       printf("\n\nprintRecord(struct record*, int) has been called with parameters passed:\naccNo: %d", uaccountno);
       printf("\n\n**************************************************\n");
       }
-
 
 
 
@@ -245,6 +223,8 @@ void printAllRecords(struct record *start)
 
   struct record * prev;
 
+if (start != NULL) {
+
   temp = start;
 
     if (debugmode == 1)
@@ -256,19 +236,25 @@ void printAllRecords(struct record *start)
 
     while (temp->next != NULL)
     {
-
-        prev = temp;
-
-        temp = temp->next;
-
         printf("\nAccount Number:\t%d", temp->accountno);
         printf("\nName:\t%s", temp->name);
         printf("\nAddress:");
         printf("\n%s",temp->address);
         printf("\nYear of Birth:\t%d\n", temp->yearofbirth);
 
+        prev = temp;
+        temp = temp->next;
     }
 
+    if (temp->next == NULL)
+    {
+        printf("\nAccount Number:\t%d", temp->accountno);
+        printf("\nName:\t%s", temp->name);
+        printf("\nAddress:");
+        printf("\n%s",temp->address);
+        printf("\nYear of Birth:\t%d\n", temp->yearofbirth);
+    }
+}
 
 
 }
@@ -342,10 +328,6 @@ while (temp->next != NULL)
         }
     }
 }
-
-
-
-
 
 
 return 0;
