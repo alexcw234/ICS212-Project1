@@ -17,6 +17,10 @@
 //****************************************************************/
 
 #include "project1database.h"
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+#include <stdlib.h>
 extern debugmode;
 
 /*****************************************************************
@@ -38,114 +42,112 @@ extern debugmode;
 //
 //****************************************************************/
 
-int addRecord (struct record **nextrec, int accNo, char name[ ],char address[ ],int year)
+int addRecord (struct record **start, int uaccountno, char uname[ ],char uaddr[ ],int uyob)
 {
 
-struct rec * temp ;
+struct record * temp ;
 
-struct rec * prev;
+struct record * prev;
 
-struct rec * tempnext = NULL;
+struct record *tempnext = NULL;
 
 if (debugmode == 1)
 {
 printf("\n\n**************************************************");
-printf("\n\naddRecord(struct record**, int, char[], char[], int) has been called with parameters passed:\naccNo: %d\nname: %s \naddress: %s\nyear: %d", accNo, name, address, year);
+printf("\n\naddRecord(struct record**, int, char[], char[], int) has been called with parameters passed:\naccNo: %d\nname: %s \naddress: %s\nyear: %d", uaccountno, uname, uaddr, uyob);
 printf("\n\n**************************************************\n");
 }
 
 
-if (start != NULL)
+if (*start != NULL)
 {
-    temp = start;
+    temp = *start;
     prev = temp;
-    temp = start.next;
+    temp = temp->next;
 
 
-    while (temp.next != NULL)
+    while (temp->next != NULL)
     {
-        if (uaccount > temp.accountno)
+        if (uaccountno > temp->accountno)
         {
             prev = temp;
-            temp = temp.next;
+            temp = temp->next;
         }
 
 
-        if (uaccount <= temp.accountno)
+        if (uaccountno <= temp->accountno)
         {
 
             tempnext = temp;
-            prev.next = malloc(sizeof(struct rec));
-            temp = prev.next;
+            prev->next = (struct record*) malloc(sizeof(struct record));
+            temp = prev->next;
         }
 
     }
 
-    if (temp.next != NULL)
+    if (temp->next != NULL)
     {
-        temp.next = tempnext;
+        temp->next = tempnext;
 
-        temp.accountno = uaccount;
+        temp->accountno = uaccountno;
 
+        strcpy(temp->name, uname);
 
-        temp.name = uname;
+        strcpy(temp->address, uaddr);
 
-
-        temp.address = uaddr;
-
-
-        temp.yearofbirth = uyob;
+        temp->yearofbirth = uyob;
 
     }
-    if (temp.next == NULL)
+    if (temp->next == NULL)
     {
-     if (uaccount > temp.accountno)
+     if (uaccountno > temp->accountno)
      {
 
-        temp.next = malloc(sizeof(struct rec));
+        temp->next = (struct record*) malloc(sizeof(struct record));
 
 
-        prev = temp.next;
+        prev = temp->next;
 
-        temp = temp.next;
+        temp = temp->next;
 
-        temp.accountno = uaccount;
-
-
-        temp.name = uname;
+        temp->accountno = uaccountno;
 
 
-        temp.address = uaddr;
+        strcpy(temp->name, uname);
+
+        strcpy(temp->address, uaddr);
 
 
-        temp.yearofbirth = uyob;
+        temp->yearofbirth = uyob;
 
 
-        temp.next = NULL;
+        temp->next = NULL;
       }
     }
 }
-if (start = NULL)
+if (*start == NULL)
 {
-    start = malloc(sizeof(struct rec));
 
-    temp = start;
+    *start = (struct record*) malloc(sizeof(struct record));
 
-    temp.next = malloc(sizeof(struct rec));
+    temp = *start;
 
-
-    temp = temp.next;
-
-    temp.accountno = uaccount;
+    temp->next = (struct record*) malloc(sizeof(struct record));
 
 
-    temp.name = uname;
+    temp = temp->next;
 
-    temp.address = uaddr;
+    temp->accountno = uaccountno;
 
-    temp.yearofbirth = uyob;
 
-    temp.next = NULL;
+    strcpy(temp->name, uname);
+
+    strcpy(temp->address, uaddr);
+
+
+    temp->yearofbirth = uyob;
+
+    temp->next = NULL;
 
 }
 
@@ -175,12 +177,12 @@ return 0;
 //
 //****************************************************************/
 
-int printRecord (struct record *arecord, int accNo)
+int printRecord (struct record *start, int uaccountno)
 {
       if (debugmode == 1)
       {
       printf("\n\n**************************************************");
-      printf("\n\nprintRecord(struct record*, int) has been called with parameters passed:\naccNo: %d", accNo);
+      printf("\n\nprintRecord(struct record*, int) has been called with parameters passed:\naccNo: %d", uaccountno);
       printf("\n\n**************************************************\n");
       }
 
@@ -205,12 +207,12 @@ return 0;
 //
 //****************************************************************/
 
-int modifyRecord (struct record *arecord, int accNo, char address[ ])
+int modifyRecord (struct record *start, int uaccountno, char uaddr[ ])
 {
     if (debugmode == 1)
     {
     printf("\n\n**************************************************");
-    printf("\n\nmodifyRecord(struct record*, int, char[]) has been called with parameters passed:\naccNo: %d\naddress: %s", accNo, address);
+    printf("\n\nmodifyRecord(struct record*, int, char[]) has been called with parameters passed:\naccNo: %d\naddress: %s", uaccountno, uaddr);
     printf("\n\n**************************************************\n");
     }
 
@@ -235,7 +237,7 @@ return 0;
 //
 //****************************************************************/
 
-void printAllRecords(struct record *arecord)
+void printAllRecords(struct record *start)
 {
     if (debugmode == 1)
     {
@@ -267,55 +269,55 @@ void printAllRecords(struct record *arecord)
 //
 //****************************************************************/
 
-int deleteRecord(struct record **nextrec, int accNo)
+int deleteRecord(struct record **start, int uaccountno)
 {
 
-struct rec * temp ;
+struct record * temp ;
 
-struct rec * prev;
+struct record * prev;
 
-temp = start;
+temp = *start;
 
 
 if (debugmode == 1)
 {
 printf("\n\n**************************************************");
-printf("\n\nprintRecord(struct record**) has been called with parameters passed:\naccNo: %d", accNo);
+printf("\n\nprintRecord(struct record**) has been called with parameters passed:\naccNo: %d", uaccountno);
 printf("\n\n**************************************************\n");
 }
 
-while (temp.next != NULL)
+while (temp->next != NULL)
 {
-    while (uaccountNumber != temp.accountno)
+    while (uaccountno != temp->accountno)
     {
 
         prev = temp;
 
-        temp = next;
+        temp = temp->next;
     }
 
-    while (uaccountNumber == temp.accountno)
+    while (uaccountno == temp->accountno)
     {
 
-        if (temp.next == NULL)
+        if (temp->next == NULL)
         {
-            prev.next = NULL;
+            prev->next = NULL;
 
 
             free(temp);
 
             temp = prev;
         }
-        if (temp.next != NULL)
+        if (temp->next != NULL)
         {
-            prev.next = temp.next
+            prev->next = temp->next;
 
 
             free(temp);
 
 
 
-            temp = prev.next;
+            temp = prev->next;
         }
     }
 }
