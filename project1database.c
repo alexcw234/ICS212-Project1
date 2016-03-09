@@ -63,7 +63,7 @@ if (*start != NULL)
 {
     temp = *start;
 
-    if (temp->next != NULL && uaccountno <= temp->accountno)
+    if (uaccountno <= temp->accountno)
     {
       tempnext = temp;
       temp = (struct record*) malloc(sizeof(struct record));
@@ -102,18 +102,18 @@ if (*start != NULL)
     }
     if (temp->next == NULL)
     {
-     if (uaccountno > temp->accountno)
-     {
-        temp->next = (struct record*) malloc(sizeof(struct record));
+       if (uaccountno > temp->accountno)
+       {
+          temp->next = (struct record*) malloc(sizeof(struct record));
 
-        prev = temp->next;
-        temp = temp->next;
+          prev = temp->next;
+          temp = temp->next;
 
-        temp->accountno = uaccountno;
-        strcpy(temp->name, uname);
-        strcpy(temp->address, uaddr);
-        temp->yearofbirth = uyob;
-        temp->next = NULL;
+          temp->accountno = uaccountno;
+          strcpy(temp->name, uname);
+          strcpy(temp->address, uaddr);
+          temp->yearofbirth = uyob;
+          temp->next = NULL;
       }
     }
 }
@@ -282,8 +282,11 @@ struct record * temp ;
 
 struct record * prev;
 
+int returnvalue = 0;
+
 temp = *start;
 
+prev = NULL;
 
 if (debugmode == 1)
 {
@@ -292,42 +295,71 @@ printf("\n\ndeleteRecord(struct record**) has been called with parameters passed
 printf("\n\n**************************************************\n");
 }
 
-while (temp->next != NULL)
+if (*start == NULL)
 {
-    while (uaccountno != temp->accountno)
+    returnvalue = -1;
+}
+else if (temp->next == NULL)
+{
+    if (uaccountno == temp->accountno)
     {
-
-        prev = temp;
-
-        temp = temp->next;
-    }
-
-    while (uaccountno == temp->accountno)
-    {
-
-        if (temp->next == NULL)
-        {
-            prev->next = NULL;
-
-
-            free(temp);
-
-            temp = prev;
-        }
-        if (temp->next != NULL)
-        {
-            prev->next = temp->next;
-
-
-            free(temp);
-
-
-
-            temp = prev->next;
-        }
+        free(temp);
+        *start = NULL;
     }
 }
+else
+{
+    while (temp->next != NULL)
+    {
+
+        while (uaccountno != temp->accountno)
+        {
+            prev = temp;
+            temp = temp->next;
+        }
+
+        while (uaccountno == temp->accountno)
+        {
 
 
-return 0;
+            if (temp->next == NULL && prev != NULL)
+            {
+                prev->next = NULL;
+
+                free(temp);
+
+                temp = prev;
+
+            }
+            else if (temp->next == NULL && prev == NULL)
+            {
+                free(temp);
+                *start = NULL;
+
+            }
+            else if (temp->next != NULL)
+            {
+                if (prev != NULL)
+                {
+                    prev->next = temp->next;
+
+                    free(temp);
+
+                    temp = prev->next;
+                }
+                else
+                {
+                    *start = temp->next;
+                    prev = temp;
+                    temp = temp->next;
+                    free(prev);
+                    prev = NULL;
+                }
+            }
+        }
+    }
+
+}
+
+return returnvalue;
 }
