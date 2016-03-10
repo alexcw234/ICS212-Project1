@@ -461,7 +461,7 @@ return returnvalue;
 //
 //****************************************************************/
 
-int readfile(struct account accarray[], int* numcust, char filename[])
+int readfile(struct record ** start, char filename[])
 {
     char line[80];
     int customer = 0;
@@ -546,13 +546,10 @@ int readfile(struct account accarray[], int* numcust, char filename[])
 //              numcust(int) : the number of records to be added.
 //              filename (char[]) : The name of the file to write to.
 //
-// Retunrs: 0 : on successful write.
-//          -1 : if write is unsuccesful for any reason such as
-//               invalid number of customers.
 //
 //****************************************************************/
 
-int writefile(struct account accarray[], int numcust, char filename[])
+void writefile(struct record *, char filename[])
 {
     int customer = 0;
     int returnvalue = 0;
@@ -573,13 +570,14 @@ int writefile(struct account accarray[], int numcust, char filename[])
 
     if (filepointer != NULL)
     {
+
+
         if (numcust > 0)
         {
 
             for (customer = 0; customer < numcust; customer++)
             {
-                fprintf(filepointer,"%s\n%d\n%f\n", accarray[customer].name,
-                accarray[customer].accountno, accarray[customer].balance);
+                fprintf();
 
             }
 
@@ -604,7 +602,7 @@ int writefile(struct account accarray[], int numcust, char filename[])
 
 
 
-    
+
     struct record * temp ;
 
     struct record * prev;
@@ -647,5 +645,4 @@ int writefile(struct account accarray[], int numcust, char filename[])
   }
 
 
-    return returnvalue;
 }
