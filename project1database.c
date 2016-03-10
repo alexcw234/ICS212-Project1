@@ -532,6 +532,7 @@ int readfile(struct account accarray[], int* numcust, char filename[])
     return returnvalue;
 }
 
+
 /*****************************************************************
 //
 // Function name: writefile
@@ -595,6 +596,56 @@ int writefile(struct account accarray[], int numcust, char filename[])
         returnvalue = -1;
 
     }
+
+
+
+
+
+
+
+
+    
+    struct record * temp ;
+
+    struct record * prev;
+
+  if (start != NULL) {
+
+    temp = start;
+
+      if (debugmode == 1)
+      {
+      printf("\n\n**************************************************");
+      printf("\n\nprintAllRecords(struct record*) has been called.");
+      printf("\n\n**************************************************\n");
+      }
+
+      while (temp->next != NULL)
+      {
+          printf("\nAccount Number:\t%d", temp->accountno);
+          printf("\nName:\t%s", temp->name);
+          printf("\nAddress:");
+          printf("\n%s",temp->address);
+          printf("\nYear of Birth:\t%d\n", temp->yearofbirth);
+
+          prev = temp;
+          temp = temp->next;
+      }
+
+      if (temp->next == NULL)
+      {
+          printf("\nAccount Number:\t%d", temp->accountno);
+          printf("\nName:\t%s", temp->name);
+          printf("\nAddress:");
+          printf("\n%s",temp->address);
+          printf("\nYear of Birth:\t%d\n", temp->yearofbirth);
+      }
+  }
+  else
+  {
+    printf("\nThe list is empty\n");
+  }
+
 
     return returnvalue;
 }
