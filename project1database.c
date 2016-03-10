@@ -248,10 +248,9 @@ int modifyRecord (struct record *start, int uaccountno, char uaddr[ ])
     printf("\n\nmodifyRecord(struct record*, int, char[]) has been called with parameters passed:\naccNo: %d\naddress: %s", uaccountno, uaddr);
     printf("\n\n**************************************************\n");
     }
-    
+
     if (start == NULL)
     {
-        printf("\nThe list is empty\n");
         returnvalue = -1;
     }
     else
@@ -260,12 +259,7 @@ int modifyRecord (struct record *start, int uaccountno, char uaddr[ ])
         {
             if (uaccountno == temp->accountno)
             {
-                printf("\nAccount Number:\t%d", temp->accountno);
-                printf("\nName:\t%s", temp->name);
-                printf("\nAddress:");
-                printf("\n%s",temp->address);
-                printf("\nYear of Birth:\t%d\n", temp->yearofbirth);
-
+                strcpy(temp->address, uaddr);
             }
                 prev = temp;
                 temp = temp->next;
@@ -273,12 +267,7 @@ int modifyRecord (struct record *start, int uaccountno, char uaddr[ ])
 
         if (temp->next == NULL && uaccountno == temp->accountno)
         {
-            printf("\nAccount Number:\t%d", temp->accountno);
-            printf("\nName:\t%s", temp->name);
-            printf("\nAddress:");
-            printf("\n%s",temp->address);
-            printf("\nYear of Birth:\t%d\n", temp->yearofbirth);
-
+            strcpy(temp->address, uaddr);
         }
 
     }
