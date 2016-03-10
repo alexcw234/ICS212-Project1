@@ -588,12 +588,11 @@ void writefile(struct record * start, char filename[])
 
              while (temp->next != NULL)
              {
-                 fprintf(filepointer, "\nAccount Number:\t%d", temp->accountno);
-                 fprintf(filepointer, "\nName:\t%s", temp->name);
-                 fprintf(filepointer, "\nAddress:");
+                 fprintf(filepointer, "\n%d", temp->accountno);
+                 fprintf(filepointer, "\n%s", temp->name);
                  fprintf(filepointer, "\n%s",temp->address);
                  fprintf(filepointer, "$");
-                 fprintf(filepointer, "\nYear of Birth:\t%d\n", temp->yearofbirth);
+                 fprintf(filepointer, "\n%d\n", temp->yearofbirth);
 
                  prev = temp;
                  temp = temp->next;
@@ -601,12 +600,11 @@ void writefile(struct record * start, char filename[])
 
              if (temp->next == NULL)
              {
-                 fprintf(filepointer, "\nAccount Number:\t%d", temp->accountno);
-                 fprintf(filepointer, "\nName:\t%s", temp->name);
-                 fprintf(filepointer, "\nAddress:");
-                 fprintf(filepointer, "\n%s",temp->address);
-                 fprintf(filepointer, "$");
-                 fprintf(filepointer, "\nYear of Birth:\t%d\n", temp->yearofbirth);
+                fprintf(filepointer, "\n%d", temp->accountno);
+                fprintf(filepointer, "\n%s", temp->name);
+                fprintf(filepointer, "\n%s",temp->address);
+                fprintf(filepointer, "$");
+                fprintf(filepointer, "\n%d\n", temp->yearofbirth);
              }
 
             fclose(filepointer);
