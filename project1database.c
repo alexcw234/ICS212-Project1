@@ -165,7 +165,7 @@ int printRecord (struct record *start, int uaccountno)
 
       int returnvalue = 0;
 
-      temp = *start;
+      temp = start;
 
       prev = NULL;
 
@@ -176,74 +176,41 @@ int printRecord (struct record *start, int uaccountno)
       printf("\n\n**************************************************\n");
       }
 
-      if (*start == NULL)
+      if (start == NULL)
       {
+          printf("\nThe list is empty\n");
           returnvalue = -1;
-      }
-      else if (temp->next == NULL)
-      {
-          if (uaccountno == temp->accountno)
-          {
-              free(temp);
-              *start = NULL;
-          }
       }
       else
       {
-          while (*start != NULL && temp->next != NULL)
+          while (temp->next != NULL)
           {
-
-              while (uaccountno != temp->accountno && temp->next != NULL)
+              if (uaccountno == temp->accountno)
               {
+                  printf("\nAccount Number:\t%d", temp->accountno);
+                  printf("\nName:\t%s", temp->name);
+                  printf("\nAddress:");
+                  printf("\n%s",temp->address);
+                  printf("\nYear of Birth:\t%d\n", temp->yearofbirth);
+
+              }
                   prev = temp;
                   temp = temp->next;
+          }
 
-              }
+          if (temp->next == NULL && uaccountno == temp->accountno)
+          {
+              printf("\nAccount Number:\t%d", temp->accountno);
+              printf("\nName:\t%s", temp->name);
+              printf("\nAddress:");
+              printf("\n%s",temp->address);
+              printf("\nYear of Birth:\t%d\n", temp->yearofbirth);
 
-              while (*start != NULL && uaccountno == temp->accountno)
-              {
-
-                  if (temp->next == NULL && prev != NULL)
-                  {
-                      prev->next = NULL;
-
-                      free(temp);
-
-                      temp = prev;
-
-
-                  }
-                  else if (temp->next == NULL && prev == NULL)
-                  {
-                      free(temp);
-                      *start = NULL;
-
-                  }
-                  else if (temp->next != NULL)
-                  {
-                      if (prev != NULL)
-                      {
-                          prev->next = temp->next;
-
-                          free(temp);
-
-                          temp = prev->next;
-                      }
-                      else
-                      {
-                          *start = temp->next;
-                          prev = temp;
-                          temp = temp->next;
-                          free(prev);
-                          prev = NULL;
-                      }
-                  }
-              }
           }
 
       }
 
-return 0;
+return returnvalue;
 }
 
 /*****************************************************************
@@ -328,6 +295,10 @@ if (start != NULL) {
         printf("\nYear of Birth:\t%d\n", temp->yearofbirth);
     }
 }
+else
+{
+  printf("\nThe list is empty\n");
+}
 
 
 }
@@ -371,6 +342,7 @@ printf("\n\n**************************************************\n");
 
 if (*start == NULL)
 {
+
     returnvalue = -1;
 }
 else if (temp->next == NULL)
