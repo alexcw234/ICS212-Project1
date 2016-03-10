@@ -463,9 +463,6 @@ return returnvalue;
 
 int readfile(struct record ** start, char filename[])
 {
-
-
-
     char line[80];
 
     int tempAccNo;
