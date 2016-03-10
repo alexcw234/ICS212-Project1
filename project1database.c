@@ -309,19 +309,20 @@ else if (temp->next == NULL)
 }
 else
 {
-    while (temp->next != NULL)
+    while (*start != NULL && temp->next != NULL)
     {
-
-        while (uaccountno != temp->accountno)
+printf("\nSTEP A");
+        while (uaccountno != temp->accountno && temp->next != NULL)
         {
             prev = temp;
             temp = temp->next;
+            printf("\nSTEP B");
         }
-
-        while (uaccountno == temp->accountno)
+  printf("\nSTEP C");
+        while (*start != NULL && uaccountno == temp->accountno)
         {
 
-
+  printf("\nSTEP D");
             if (temp->next == NULL && prev != NULL)
             {
                 prev->next = NULL;
@@ -329,6 +330,7 @@ else
                 free(temp);
 
                 temp = prev;
+
 
             }
             else if (temp->next == NULL && prev == NULL)
