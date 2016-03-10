@@ -74,6 +74,9 @@ int main(int argc, char* argv[])
     struct record *start = NULL;
 
 
+    readfile(&start, "storage.txt");
+
+
     inLoop = 1;
     addLineLoop = 0;
     yesnoLoop = 0;
@@ -748,6 +751,7 @@ int main(int argc, char* argv[])
                     loopQuit(&inLoop);
                     loopQuit(&yesnoLoop);
                     printf("\n\nGoodbye.\n\n\n");
+                    writefile(start, "storage.txt");
                 }
                 else if (validation == 1)
                 {

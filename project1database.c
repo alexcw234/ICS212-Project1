@@ -473,15 +473,10 @@ int readfile(struct record ** start, char filename[])
     char tempAddress[80];
     int tempYear;
 
-    int customer = 0;
     int returnvalue = 0;
     FILE *filepointer;
 
     struct record * temp = *start;
-
-    *numcust = 0;
-
-
 
     if (filename[strlen(filename)-4] == '.' &&
         filename[strlen(filename)-3] == 't' &&

@@ -26,4 +26,4 @@ int modifyRecord (struct record *, int, char [ ]);
 void printAllRecords(struct record *);
 int deleteRecord(struct record **, int);
 int readfile(struct record **, char []);
-int writefile(struct record *, char []);
+void writefile(struct record *, char []);
