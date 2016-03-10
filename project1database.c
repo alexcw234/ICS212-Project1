@@ -159,6 +159,15 @@ return 0;
 
 int printRecord (struct record *start, int uaccountno)
 {
+      struct record * temp ;
+
+      struct record * prev;
+
+      int returnvalue = 0;
+
+      temp = start;
+
+      prev = NULL;
 
       if (debugmode == 1)
       {
@@ -167,9 +176,41 @@ int printRecord (struct record *start, int uaccountno)
       printf("\n\n**************************************************\n");
       }
 
+      if (start == NULL)
+      {
+          printf("\nThe list is empty\n");
+          returnvalue = -1;
+      }
+      else
+      {
+          while (temp->next != NULL)
+          {
+              if (uaccountno == temp->accountno)
+              {
+                  printf("\nAccount Number:\t%d", temp->accountno);
+                  printf("\nName:\t%s", temp->name);
+                  printf("\nAddress:");
+                  printf("\n%s",temp->address);
+                  printf("\nYear of Birth:\t%d\n", temp->yearofbirth);
 
+              }
+                  prev = temp;
+                  temp = temp->next;
+          }
 
-return 0;
+          if (temp->next == NULL && uaccountno == temp->accountno)
+          {
+              printf("\nAccount Number:\t%d", temp->accountno);
+              printf("\nName:\t%s", temp->name);
+              printf("\nAddress:");
+              printf("\n%s",temp->address);
+              printf("\nYear of Birth:\t%d\n", temp->yearofbirth);
+
+          }
+
+      }
+
+return returnvalue;
 }
 
 /*****************************************************************
@@ -254,6 +295,10 @@ if (start != NULL) {
         printf("\nYear of Birth:\t%d\n", temp->yearofbirth);
     }
 }
+else
+{
+  printf("\nThe list is empty\n");
+}
 
 
 }
@@ -297,6 +342,7 @@ printf("\n\n**************************************************\n");
 
 if (*start == NULL)
 {
+
     returnvalue = -1;
 }
 else if (temp->next == NULL)
