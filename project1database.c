@@ -311,18 +311,17 @@ else
 {
     while (*start != NULL && temp->next != NULL)
     {
-printf("\nSTEP A");
+
         while (uaccountno != temp->accountno && temp->next != NULL)
         {
             prev = temp;
             temp = temp->next;
-            printf("\nSTEP B");
+
         }
-  printf("\nSTEP C");
+
         while (*start != NULL && uaccountno == temp->accountno)
         {
 
-  printf("\nSTEP D");
             if (temp->next == NULL && prev != NULL)
             {
                 prev->next = NULL;
