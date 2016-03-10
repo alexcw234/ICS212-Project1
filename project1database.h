@@ -25,3 +25,5 @@ int printRecord (struct record *, int);
 int modifyRecord (struct record *, int, char [ ]);
 void printAllRecords(struct record *);
 int deleteRecord(struct record **, int);
+int readfile(struct account accarray[], int* numcust, char filename[]);
+int writefile(struct account accarray[], int numcust, char filename[]);
