@@ -479,6 +479,13 @@ int readfile(struct record ** start, char filename[])
 
     struct record * temp = *start;
 
+    if (debugmode == 1)
+    {
+    printf("\n\n**************************************************");
+    printf("\n\nreadfile(struct record**) has been called. with parameters passed:\nfilename: %s", filename);
+    printf("\n\n**************************************************\n");
+    }
+
     if (filename[strlen(filename)-4] == '.' &&
         filename[strlen(filename)-3] == 't' &&
         filename[strlen(filename)-2] == 'x' &&
