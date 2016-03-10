@@ -231,17 +231,59 @@ return returnvalue;
 
 int modifyRecord (struct record *start, int uaccountno, char uaddr[ ])
 {
+
+    struct record * temp ;
+
+    struct record * prev;
+
+    int returnvalue = 0;
+
+    temp = start;
+
+    prev = NULL;
+
     if (debugmode == 1)
     {
     printf("\n\n**************************************************");
     printf("\n\nmodifyRecord(struct record*, int, char[]) has been called with parameters passed:\naccNo: %d\naddress: %s", uaccountno, uaddr);
     printf("\n\n**************************************************\n");
     }
+    
+    if (start == NULL)
+    {
+        printf("\nThe list is empty\n");
+        returnvalue = -1;
+    }
+    else
+    {
+        while (temp->next != NULL)
+        {
+            if (uaccountno == temp->accountno)
+            {
+                printf("\nAccount Number:\t%d", temp->accountno);
+                printf("\nName:\t%s", temp->name);
+                printf("\nAddress:");
+                printf("\n%s",temp->address);
+                printf("\nYear of Birth:\t%d\n", temp->yearofbirth);
 
+            }
+                prev = temp;
+                temp = temp->next;
+        }
 
+        if (temp->next == NULL && uaccountno == temp->accountno)
+        {
+            printf("\nAccount Number:\t%d", temp->accountno);
+            printf("\nName:\t%s", temp->name);
+            printf("\nAddress:");
+            printf("\n%s",temp->address);
+            printf("\nYear of Birth:\t%d\n", temp->yearofbirth);
 
+        }
 
-return 0;
+    }
+
+return returnvalue;
 }
 
 /*****************************************************************
