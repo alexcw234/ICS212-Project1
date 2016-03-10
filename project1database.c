@@ -470,6 +470,10 @@ int readfile(struct record ** start, char filename[])
     char tempAddress[80];
     int tempYear;
 
+    char tempField[80];
+
+    int inLoop = 1;
+
     int returnvalue = 0;
     FILE *filepointer;
 
@@ -512,20 +516,25 @@ int readfile(struct record ** start, char filename[])
 
                 strcpy(tempName,line);
 
-                fgets(line, 80, filepointer);
-
-                if (line[strlen(line) - 1] == '\n')
+                while (inLoop == 1)
                 {
-                    line[strlen(line) - 1] = '\0';
-                }
-                if (line[strlen(line) - 1] == '$')
-                {
-                    line[strlen(line) - 1] = '\0';
+
+                  fgets(tempField, 80, filepointer);
+
+                  if (tempField[strlen(tempField) - 2] == '$')
+                  {
+                      tempField[strlen(tempField) - 2] = '\0';
+                      inLoop = 0;
+                  }
                 }
 
-                strcpy(tempAddress,line);
 
-                fgets(line, 80, filepointer);
+               inLoop = 1;
+
+               strcpy(tempAddress, tempField);
+
+
+              fgets(line, 80, filepointer);
 
                 if (line[strlen(line) - 1] == '\n')
                 {
@@ -606,7 +615,7 @@ void writefile(struct record * start, char filename[])
 
              while (temp->next != NULL)
              {
-                 fprintf(filepointer, "\n%d", temp->accountno);
+                 fprintf(filepointer, "%d", temp->accountno);
                  fprintf(filepointer, "\n%s", temp->name);
                  fprintf(filepointer, "\n%s",temp->address);
                  fprintf(filepointer, "$");
@@ -618,7 +627,7 @@ void writefile(struct record * start, char filename[])
 
              if (temp->next == NULL)
              {
-                fprintf(filepointer, "\n%d", temp->accountno);
+                fprintf(filepointer, "%d", temp->accountno);
                 fprintf(filepointer, "\n%s", temp->name);
                 fprintf(filepointer, "\n%s",temp->address);
                 fprintf(filepointer, "$");
