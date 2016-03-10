@@ -463,10 +463,21 @@ return returnvalue;
 
 int readfile(struct record ** start, char filename[])
 {
+
+
+
     char line[80];
+
+    int tempAccNo;
+    char tempName[25];
+    char tempAddress[80];
+    int tempYear;
+
     int customer = 0;
     int returnvalue = 0;
     FILE *filepointer;
+
+    struct record * temp = *start;
 
     *numcust = 0;
 
@@ -493,20 +504,12 @@ int readfile(struct record ** start, char filename[])
 
             if (feof(filepointer) == 0)
             {
-                if (line[strlen(line) - 1] == '\n')
-                {
-                    line[strlen(line) - 1] = '\0';
-                }
-
-                strcpy(accarray[customer].name,line);
-
-                fgets(line, 80, filepointer);
 
                 if (line[strlen(line) - 1] == '\n')
                 {
                     line[strlen(line) - 1] = '\0';
                 }
-                accarray[customer].accountno = atoi(line);
+                tempAccNo = atoi(line);
 
                 fgets(line, 80, filepointer);
 
@@ -515,10 +518,33 @@ int readfile(struct record ** start, char filename[])
                     line[strlen(line) - 1] = '\0';
                 }
 
-                accarray[customer].balance = atof(line);
+                strcpy(tempName,line);
 
-                customer++;
-                *numcust = *numcust + 1;
+                fgets(line, 80, filepointer);
+
+                if (line[strlen(line) - 1] == '\n')
+                {
+                    line[strlen(line) - 1] = '\0';
+                }
+                if (line[strlen(line) - 1] == '$')
+                {
+                    line[strlen(line) - 1] = '\0';
+                }
+
+                strcpy(tempAddress,line);
+
+                fgets(line, 80, filepointer);
+
+                if (line[strlen(line) - 1] == '\n')
+                {
+                    line[strlen(line) - 1] = '\0';
+                }
+
+                tempYear = atoi(line);
+
+
+                 addRecord(&temp, tempAccNo, tempName, tempAddress, tempYear);
+                 *start = temp;
 
             }
 
