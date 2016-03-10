@@ -549,12 +549,23 @@ int readfile(struct record ** start, char filename[])
 //
 //****************************************************************/
 
-void writefile(struct record *, char filename[])
+void writefile(struct record * start, char filename[])
 {
-    int customer = 0;
+    struct record * temp ;
+
+    struct record * prev;
+
     int returnvalue = 0;
 
     FILE *filepointer;
+
+    if (debugmode == 1)
+    {
+    printf("\n\n**************************************************");
+    printf("\n\nwritefile(struct record*) has been called. with parameters passed:\nfilename: %s", filename);
+    printf("\n\n**************************************************\n");
+    }
+
 
     if (filename[strlen(filename)-4] == '.' &&
         filename[strlen(filename)-3] == 't' &&
@@ -571,15 +582,32 @@ void writefile(struct record *, char filename[])
     if (filepointer != NULL)
     {
 
-
-        if (numcust > 0)
+        if (start != NULL)
         {
+             temp = start;
 
-            for (customer = 0; customer < numcust; customer++)
-            {
-                fprintf();
+             while (temp->next != NULL)
+             {
+                 fprintf(filepointer, "\nAccount Number:\t%d", temp->accountno);
+                 fprintf(filepointer, "\nName:\t%s", temp->name);
+                 fprintf(filepointer, "\nAddress:");
+                 fprintf(filepointer, "\n%s",temp->address);
+                 fprintf(filepointer, "$");
+                 fprintf(filepointer, "\nYear of Birth:\t%d\n", temp->yearofbirth);
 
-            }
+                 prev = temp;
+                 temp = temp->next;
+             }
+
+             if (temp->next == NULL)
+             {
+                 fprintf(filepointer, "\nAccount Number:\t%d", temp->accountno);
+                 fprintf(filepointer, "\nName:\t%s", temp->name);
+                 fprintf(filepointer, "\nAddress:");
+                 fprintf(filepointer, "\n%s",temp->address);
+                 fprintf(filepointer, "$");
+                 fprintf(filepointer, "\nYear of Birth:\t%d\n", temp->yearofbirth);
+             }
 
             fclose(filepointer);
         }
@@ -589,60 +617,4 @@ void writefile(struct record *, char filename[])
             fclose(filepointer);
         }
     }
-    else
-    {
-        returnvalue = -1;
-
-    }
-
-
-
-
-
-
-
-
-
-    struct record * temp ;
-
-    struct record * prev;
-
-  if (start != NULL) {
-
-    temp = start;
-
-      if (debugmode == 1)
-      {
-      printf("\n\n**************************************************");
-      printf("\n\nprintAllRecords(struct record*) has been called.");
-      printf("\n\n**************************************************\n");
-      }
-
-      while (temp->next != NULL)
-      {
-          printf("\nAccount Number:\t%d", temp->accountno);
-          printf("\nName:\t%s", temp->name);
-          printf("\nAddress:");
-          printf("\n%s",temp->address);
-          printf("\nYear of Birth:\t%d\n", temp->yearofbirth);
-
-          prev = temp;
-          temp = temp->next;
-      }
-
-      if (temp->next == NULL)
-      {
-          printf("\nAccount Number:\t%d", temp->accountno);
-          printf("\nName:\t%s", temp->name);
-          printf("\nAddress:");
-          printf("\n%s",temp->address);
-          printf("\nYear of Birth:\t%d\n", temp->yearofbirth);
-      }
-  }
-  else
-  {
-    printf("\nThe list is empty\n");
-  }
-
-
 }
