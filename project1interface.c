@@ -136,7 +136,7 @@ int main(int argc, char* argv[])
         fgets(choice, 80, stdin);
         nullBreak(choice);
 
-        if (choice[0] == '1')
+        if (choice[0] == '1' )
         {/* Adds new record */
             addRecLoop = 1;
             while (addRecLoop == 1)
@@ -552,6 +552,7 @@ int main(int argc, char* argv[])
                         printf("\nInvalid entry. Please re-enter.");
                     }
                 }
+            }
                     /* Finalize */
                 yesnoLoop = 1;
 
@@ -568,37 +569,14 @@ int main(int argc, char* argv[])
 
                     if (validation == 0)
                     {
-                        loopQuit(&addRecLoop);
                         loopQuit(&yesnoLoop);
                         modifyRecord(start, tempAccNo, tempAddress);
                     }
                     else if (validation == 1)
                     {
-                        while (yesnoLoop == 1)
-                        {
-                            printf("\nGo back to main menu (Y/N)?");
+                        loopQuit(&yesnoLoop);
+                        printf("\nReturning to main menu.\n");
 
-                            fgets(choice, 80, stdin);
-                            validation = validateInput(choice, 2);
-
-                            if (validation == 0)
-                            {
-
-
-                                loopQuit(&yesnoLoop);
-                                loopQuit(&addRecLoop);
-
-                            }
-                            else if (validation == 1)
-                            {
-
-                                loopQuit(&yesnoLoop);
-                            }
-                            else
-                            {
-                                printf("\nInvalid entry. Please re-enter.");
-                            }
-                        }
                     }
                     else
                     {
@@ -606,7 +584,7 @@ int main(int argc, char* argv[])
                     }
                 }
 
-            }
+
         }
         else if (choice[0] == '3')    /* Prints one record */
         {
