@@ -2,7 +2,7 @@
 //
 // NAME: Alex Watanabe
 //
-// HOMEWORK: 3
+// Project: 1
 //
 // CLASS: ICS 212
 //
@@ -10,9 +10,9 @@
 //
 // DATE: Feb, 7, 2016
 //
-// FILE: hw3database.h
+// FILE: project1database.h
 //
-// DESCRIPTION: This file contains header for hw3database.c
+// DESCRIPTION: This file contains header for project1database.c
 //
 //
 //****************************************************************/

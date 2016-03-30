@@ -10,7 +10,7 @@
 //
 // DATE: Mar 7 , 2016
 //
-// FILE: hw3database.c
+// FILE: project1database.c
 //
 // DESCRIPTION: This file contains the database functions for project1
 //
@@ -25,7 +25,7 @@ extern debugmode;
 
 /*****************************************************************
 //
-// Function name: addRecord [STUB]
+// Function name: addRecord 
 //
 // DESCRIPTION: (Not yet implemented) Function that adds data to the
 //              struct "record" as specified by parameters
@@ -144,7 +144,7 @@ return 0;
 
 /*****************************************************************
 //
-// Function name: printRecord [STUB]
+// Function name: printRecord 
 //
 // DESCRIPTION: (Not yet implemented) Function to print a record
 //              from the database.
@@ -215,7 +215,7 @@ return returnvalue;
 
 /*****************************************************************
 //
-// Function name: modifyRecord [STUB]
+// Function name: modifyRecord 
 //
 // DESCRIPTION: (Not yet implemented) Function that modifies a
 //              record in the database.
@@ -277,7 +277,7 @@ return returnvalue;
 
 /*****************************************************************
 //
-// Function name: printAllRecords [STUB]
+// Function name: printAllRecords 
 //
 // DESCRIPTION: (Not yet implemented) Function that prints all records in the database
 //
@@ -336,7 +336,7 @@ else
 
 /*****************************************************************
 //
-// Function name: deleteRecord [STUB]
+// Function name: deleteRecord 
 //
 // DESCRIPTION: (Not yet implemented)
 //              Function that deletes a record in the database.
@@ -470,6 +470,8 @@ int readfile(struct record ** start, char filename[])
     char tempAddress[80];
     int tempYear;
 
+    int flcount = 0;
+
     char tempField[80];
 
     int inLoop = 1;
@@ -523,16 +525,23 @@ int readfile(struct record ** start, char filename[])
 
                 strcpy(tempName,line);
 
+                for (flcount = 0; flcount < 80; flcount++)
+                {
+                    tempField[flcount] = '\0';
+                }
+
                 while (inLoop == 1)
                 {
 
-                  fgets(tempField, 80, filepointer);
+                  fgets(line, 80, filepointer);
 
-                  if (tempField[strlen(tempField) - 2] == '$')
+
+                  if (line[strlen(line) - 2] == '$')
                   {
-                      tempField[strlen(tempField) - 2] = '\0';
+                      line[strlen(line) - 2] = '\0';
                       inLoop = 0;
                   }
+                  strcat(tempField, line);
                 }
 
 
@@ -576,8 +585,8 @@ int readfile(struct record ** start, char filename[])
 //              If file aleady exists, it overwrites the file.
 //              The file must be a .txt file.
 //
-// Parameters:  accarray (account[]) : The array of records to be written.
-//              numcust(int) : the number of records to be added.
+// Parameters:  start (struct record *) : The start of 
+//              
 //              filename (char[]) : The name of the file to write to.
 //
 //

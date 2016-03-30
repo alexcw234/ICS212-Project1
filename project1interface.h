@@ -2,7 +2,7 @@
 //
 // NAME: Alex Watanabe
 //
-// HOMEWORK: 3
+// PROJECT: 1
 //
 // CLASS: ICS 212
 //
@@ -10,9 +10,9 @@
 //
 // DATE: Feb, 7, 2016
 //
-// FILE: hw3interface.h
+// FILE: project1interface.h
 //
-// DESCRIPTION: This file contains header for hw3interface.c
+// DESCRIPTION: This file contains header for project1interface.c
 //
 //
 //****************************************************************/

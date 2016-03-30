@@ -2,7 +2,7 @@
 //
 // NAME: Alex Watanabe
 //
-// HOMEWORK: 3
+// PROJECT: 1
 //
 // CLASS: ICS 212
 //
@@ -10,7 +10,7 @@
 //
 // DATE: Feb 2, 2016
 //
-// FILE: hw3interface.c
+// FILE: project1interface.c
 //
 // DESCRIPTION: This file contains the user interface for hw3
 //
@@ -74,7 +74,7 @@ int main(int argc, char* argv[])
     struct record *start = NULL;
 
 
-    readfile(&start, "storage.txt");
+
 
 
     inLoop = 1;
@@ -88,9 +88,9 @@ int main(int argc, char* argv[])
 
     if (argc > 2)
     {
-        printf("hw3: Extra arguments (%d)", argc);
-        printf("\n\tUsage: hw3");
-        printf("\n\t       hw3 debug\n\n");
+        printf("project1: Extra arguments (%d)", argc);
+        printf("\n\tUsage: project1");
+        printf("\n\t       project1 debug\n\n");
 
     }
     else if (argc == 1)
@@ -112,10 +112,12 @@ int main(int argc, char* argv[])
     }
     else
     {
-        printf("hw3: Unrecognized argument (%s)", argv[1]);
-        printf("\n\tUsage: hw3");
-        printf("\n\t       hw3 debug\n\n");
+        printf("project1: Unrecognized argument (%s)", argv[1]);
+        printf("\n\tUsage: project1");
+        printf("\n\t       project1 debug\n\n");
     }
+
+    readfile(&start, "storage.txt");
 
     if (inLoop == 0)
     {
@@ -136,7 +138,7 @@ int main(int argc, char* argv[])
         fgets(choice, 80, stdin);
         nullBreak(choice);
 
-        if (choice[0] == '1' )
+        if (choice[0] == '1' && choice[1] == '\0')
         {/* Adds new record */
             addRecLoop = 1;
             while (addRecLoop == 1)
@@ -152,7 +154,7 @@ int main(int argc, char* argv[])
                 fgets(choice, 80, stdin);
                 nullBreak(choice);
 
-                if (choice[0] == '1')
+                if (choice[0] == '1' && choice[1] == '\0')
                 {/* accountnumber */
                   addLineLoop = 1;
                   while (addLineLoop == 1)
@@ -198,7 +200,7 @@ int main(int argc, char* argv[])
                   }
 
                 }
-                else if (choice[0] == '2')
+                else if (choice[0] == '2' && choice[1] == '\0')
                 {   /* name */
                     addLineLoop = 1;
 
@@ -250,7 +252,7 @@ int main(int argc, char* argv[])
 
 
                 }
-                else if (choice[0] == '3')
+                else if (choice[0] == '3' && choice[1] == '\0')
                 {
                     /* address */
                     addLineLoop = 1;
@@ -292,7 +294,7 @@ int main(int argc, char* argv[])
 
 
                 }
-                else if (choice[0] == '4')
+                else if (choice[0] == '4' && choice[1] == '\0')
                 {
                     /* yearofbirth */
                     addLineLoop = 1;
@@ -341,7 +343,7 @@ int main(int argc, char* argv[])
 
                 else if (choice[0] == '5' && allFieldsFilled[0] == 1
                 && allFieldsFilled[1] == 1 && allFieldsFilled[2] == 1
-                && allFieldsFilled[3] == 1)
+                && allFieldsFilled[3] == 1 && choice[1] == '\0')
                 {
                     /* Finalize */
                     yesnoLoop = 1;
@@ -406,7 +408,7 @@ int main(int argc, char* argv[])
                         }
                     }
                 }
-                else if (choice[0] == '5' && (allFieldsFilled[0] != 1
+                else if (choice[0] == '5' && choice[1] == '\0' && (allFieldsFilled[0] != 1
                 || allFieldsFilled[1] != 1 || allFieldsFilled[2] != 1
                 || allFieldsFilled[3] != 1))
                 {
@@ -470,7 +472,7 @@ int main(int argc, char* argv[])
                 }
             }
         }
-        else if (choice[0] == '2')    /* Modifies a record */
+        else if (choice[0] == '2' && choice[1] == '\0')    /* Modifies a record */
         {
 
 
@@ -586,7 +588,7 @@ int main(int argc, char* argv[])
 
 
         }
-        else if (choice[0] == '3')    /* Prints one record */
+        else if (choice[0] == '3' && choice[1] == '\0')    /* Prints one record */
         {
           addLineLoop = 1;
           while(addLineLoop == 1)
@@ -635,7 +637,7 @@ int main(int argc, char* argv[])
 
 
         }
-        else if (choice[0] == '4')    /* Prints all info */
+        else if (choice[0] == '4' && choice[1] == '\0')    /* Prints all info */
         {
             yesnoLoop = 1;
 
@@ -664,7 +666,7 @@ int main(int argc, char* argv[])
                 }
             }
         }
-        else if (choice[0] == '5')    /* Deletes Record */
+        else if (choice[0] == '5' && choice[1] == '\0')    /* Deletes Record */
         {
 
             addLineLoop = 1;
@@ -715,7 +717,7 @@ int main(int argc, char* argv[])
               }
 
         }
-        else if (choice[0] == '6')    /* Quits the program */
+        else if (choice[0] == '6' && choice[1] == '\0')    /* Quits the program */
         {
             yesnoLoop = 1;
 
@@ -945,13 +947,16 @@ int validateInput (char theString[], int mode)
     }
     else if (mode == 2)
     {
-        if (*theString == 'Y' || *theString == 'y')
-        {
+      if (theString[1] == '\n')
+      {
+            if (*theString == 'Y' || *theString == 'y')
+            {
             convresult = 0;
-        }
-        else if (*theString == 'N' || *theString == 'n')
-        {
-            convresult = 1;
+            }
+            else if (*theString == 'N' || *theString == 'n')
+            {
+                convresult = 1;
+            }
         }
     }
     else if (mode == 3)

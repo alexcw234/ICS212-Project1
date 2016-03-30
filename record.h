@@ -2,7 +2,7 @@
 //
 // NAME: Alex Watanabe
 //
-// HOMEWORK: 3
+// PROJECT: 1
 //
 // CLASS: ICS 212
 //
